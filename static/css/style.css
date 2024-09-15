@@ -1,0 +1,158 @@
+/* -- Variables -- */
+:root {
+  --bg-color: #f8f9fa;
+  --btn-success-color: #28a745;
+  --btn-success-hover-color: #218838;
+  --footer-bg-color: #e4e6e7b0;
+  --highlight-color: #448603e0;
+}
+
+/* -- Global Styles -- */
+body {
+  background-color: var(--bg-color);
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;
+}
+
+header {
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* -- Main Content -- */
+main {
+  max-width: 912px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* -- Container & Sections -- */
+.container > div {
+  flex: 1;
+}
+
+.section {
+  width: 750px;
+  max-width: 750px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* -- Text & Code Formatting -- */
+/* pre {
+  max-width: 912px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+} */
+
+
+
+pre {
+  white-space: pre-wrap;  /* 保留空白并允许自动换行 */
+  word-wrap: break-word;  /* 允许在单词之间换行 */
+  max-width: 750px;  /* 与其他区域保持一致的最大宽度 */
+}
+
+/* 修改下拉选择框的背景颜色 */
+#rpcProvider {
+    background-color: white;  /* 你可以设置为与页面颜色相符的值 */
+}
+
+/* 增加每个选项的行距 */
+#rpcProvider option {
+    padding: 15px 0;  /* 增加上下的padding */
+}
+
+
+
+/* -- Buttons -- */
+.btn-success {
+  background-color: var(--btn-success-color);
+}
+
+.btn-success:hover {
+  background-color: var(--btn-success-hover-color);
+}
+
+/* -- Footer -- */
+.footer {
+  background-color: var(--footer-bg-color);
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer .text-muted {
+  color: #6c757d;
+}
+
+/* -- Custom Form -- */
+.custom-form {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-form:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* -- Transaction Details -- */
+#decodedTransaction strong {
+  color: var(--highlight-color);
+  font-weight: 400;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.transaction-details {
+  word-break: break-all;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+/* -- Section Titles -- */
+.section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#myForm, #decodedTransactionContainer, #generatedCodeContainer {
+  width: 750px;  /* 设置明确的宽度 */
+  max-width: 750px;  /* 也保留最大宽度设置以防万一 */
+}
+
+
+
+#decodedTransaction {
+  padding: 20px !important;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+
+.break-word {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+#decodedTransaction > * {
+  max-width: 100%;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="icon.png">
+        <link rel="canonical" href="https://wtftx.com">
+
+        <title>WTFtx: Decode Transaction</title>
+
+        <!-- CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+
+        <!-- Custom CSS -->
+        <!-- <link rel="stylesheet" href="https://wtftx.com/static/css/style.css"> -->
+        <link rel="stylesheet" href="./static/css/style.css">
+
+        <meta name="description" content="解码和分析区块链交易">
+        <meta name="keywords" content="区块链, 交易解码, 以太坊, zkSync">
+    </head>
+
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <div class="container d-flex flex-column align-items-center">
+                    <a href="https://wtftx.com/"><img src="icon.png" alt="Logo" class="my-4" width="128px"
+                            height="128px"></a>
+                    <h1>Decode WTF Transaction</h1>
+                </div>
+            </header>
+
+            <main>
+                <div class="container d-flex flex-column align-items-center">
+                    <!-- Form -->
+                    <form id="myForm" class="custom-form mb-4 w-100" style="max-width: 750px;">
+                        <div class="form-group">
+                            <!-- <label for="rpcProvider">RPC Provider:</label>
+                            <input type="text" id="rpcProvider" name="rpcProvider" value="https://mainnet.era.zksync.io"
+                                class="form-control"> -->
+                            <label for="rpcProvider">RPC Provider:</label>
+                            <select id="rpcProvider" name="rpcProvider" class="form-control">
+                                <option value="https://mainnet.era.zksync.io">zkSync Era | https://mainnet.era.zksync.io
+                                </option>
+                                <option value="https://eth.llamarpc.com">
+                                    Ethereum | https://eth.llamarpc.com</option>
+                                <option value="https://arbitrum.llamarpc.com">
+                                    Arbitrum | https://arbitrum.llamarpc.com</option>
+                                <option value="https://optimism.llamarpc.com">
+                                    Optimism | https://optimism.llamarpc.com</option>
+                                <option value="https://mainnet.base.org">
+                                    Base | https://mainnet.base.org</option>
+                                <option value="https://bsc-dataseed1.defibit.io">
+                                    BSC | https://bsc-dataseed1.defibit.io</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="txHash">Transaction Hash:</label>
+                            <input type="text" id="txHash" name="txHash" class="form-control"
+                                value="0xb91739d318aaf8512f93d28ac3c404a7271c6cb48a21736a7460094043400c0e">
+                        </div>
+                        <div class="form-group text-center mt-3">
+                            <button type="submit" id="decodeButton" class="btn btn-success btn-lg">解码交易</button>
+                        </div>
+
+                    </form>
+
+                    <!-- Decoded Transaction -->
+                    <section id="decodedTransactionContainer" class="d-none">
+                        <h2 class="text-center mt-4 mb-4">解码后的交易</h2>
+                        <div id="decodedTransaction" class="border p-3 rounded bg-light text-dark break-word"></div>
+                    </section>
+
+                    <!-- Generated Code -->
+                    <section id="generatedCodeContainer" class="d-none">
+                        <h2 class="text-center mt-4 mb-4">生成的代码
+                            <button id="copyButton" class="btn btn-info btn-sm"
+                                data-clipboard-target="#output">复制</button>
+                        </h2>
+                        <pre><code id="output" class="border p-3 rounded bg-light text-dark python"></code></pre>
+                    </section>
+
+
+                    <!-- Other content -->
+                    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="position: fixed; bottom: 0; right: 0; display: none;">
+                        <span id="alert-message"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- popup when it fails -->
+                    <div id="failure-alert" class="alert alert-warning alert-dismissible fade show" role="alert"
+                        style="position: fixed; bottom: 0; right: 0; display: none;">
+                        <span id="failure-alert-message"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+
+        <footer class="mt-auto py-3 bg-light">
+            <div class="container text-center">
+                <span class="text-muted">© 2023 WTFtx | 由 <a href="https://twitter.com/gm365" title="Twitter: gm365">@gm365</a>
+                    & GPT4 开发 | <a href="https://debank.com/profile/0x1234231bf85ed357f3cb795b580a1953d56f0856"
+                        target="_blank" rel="nofollow" title="捐赠地址">❤️ </a> | 最后更新：
+                    2023.09.29
+                </span>
+            </div>
+        </footer>
+
+        <!-- JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+        <!-- Custom JavaScript -->
+        <script src="./static/js/utils0929.js"></script>
+        <script src="./static/js/main0929.js"></script>
+
+        <div id="alert-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;"></div>
+
+    </body>
+
+</html>
